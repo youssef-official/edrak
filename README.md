@@ -23,12 +23,14 @@
   - [Installation](#installation)
   - [Usage](#usage)
   - [API Reference](#api-reference)
+  - [Deployment on Railway](#deployment-on-railway)
 - [العربية](#العربية)
   - [نظرة عامة](#نظرة-عامة)
   - [المميزات](#المميزات)
   - [التثبيت](#التثبيت)
   - [الاستخدام](#الاستخدام)
   - [مرجع API](#مرجع-api)
+  - [النشر على Railway](#النشر-على-railway)
 
 ---
 
@@ -87,8 +89,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/edrak-ai.git
-cd edrak-ai
+git clone https://github.com/youssef-official/edrak.git
+cd edrak
 
 # Create virtual environment
 python -m venv venv
@@ -192,6 +194,17 @@ Request body:
 
 ---
 
+### Deployment on Railway
+
+Railway is a modern infrastructure platform that allows you to deploy your applications quickly and easily. Follow these steps to deploy Edrak AI on Railway:
+
+1.  **Create a new project on Railway**: Go to [Railway.app](https://railway.app/) and create a new project. You can connect your GitHub account and select the `youssef-official/edrak` repository.
+2.  **Configure Environment Variables**: Edrak AI might require environment variables for configuration. Check the `.env.example` file in the project root for a list of necessary variables. You will need to add these variables to your Railway project settings under the "Variables" tab. For example, if `API_KEY` is listed in `.env.example`, you would add `API_KEY` and its corresponding value in Railway.
+3.  **Build and Deploy**: Railway will automatically detect the `Dockerfile` in the project root and use it to build and deploy your application. Ensure your `Dockerfile` is correctly configured to run `main.py`.
+4.  **Access your application**: Once deployed, Railway will provide a public URL for your application. You can access the API and web interface through this URL.
+
+---
+
 ## العربية
 
 ### نظرة عامة
@@ -247,8 +260,8 @@ Request body:
 
 ```bash
 # استنساخ المستودع
-git clone https://github.com/yourusername/edrak-ai.git
-cd edrak-ai
+git clone https://github.com/youssef-official/edrak.git
+cd edrak
 
 # إنشاء بيئة افتراضية
 python -m venv venv
@@ -349,6 +362,17 @@ POST /v1/math/solve
   "show_steps": true
 }
 ```
+
+---
+
+### النشر على Railway
+
+Railway هي منصة بنية تحتية حديثة تتيح لك نشر تطبيقاتك بسرعة وسهولة. اتبع هذه الخطوات لنشر Edrak AI على Railway:
+
+1.  **إنشاء مشروع جديد على Railway**: انتقل إلى [Railway.app](https://railway.app/) وقم بإنشاء مشروع جديد. يمكنك ربط حساب GitHub الخاص بك واختيار مستودع `youssef-official/edrak`.
+2.  **تكوين متغيرات البيئة**: قد يتطلب Edrak AI متغيرات بيئة للتكوين. تحقق من ملف `.env.example` في جذر المشروع للحصول على قائمة بالمتغيرات الضرورية. ستحتاج إلى إضافة هذه المتغيرات إلى إعدادات مشروعك في Railway ضمن علامة التبويب "Variables". على سبيل المثال، إذا كان `API_KEY` مدرجًا في `.env.example`، فستضيف `API_KEY` وقيمته المقابلة في Railway.
+3.  **البناء والنشر**: سيكتشف Railway تلقائيًا ملف `Dockerfile` في جذر المشروع ويستخدمه لبناء ونشر تطبيقك. تأكد من تكوين `Dockerfile` بشكل صحيح لتشغيل `main.py`.
+4.  **الوصول إلى تطبيقك**: بمجرد النشر، ستوفر Railway عنوان URL عامًا لتطبيقك. يمكنك الوصول إلى واجهة برمجة التطبيقات والواجهة الويبية من خلال عنوان URL هذا.
 
 ---
 
