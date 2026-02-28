@@ -4,7 +4,7 @@
 
 ![Edrak AI Logo](https://img.shields.io/badge/Edrak-AI-6366f1?style=for-the-badge&logo=artificial-intelligence&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-1.0.0--alpha-8b5cf6?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.9+-06b6d4?style=for-the-badge&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10-06b6d4?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.1+-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white)
 
 **نموذج ذكاء اصطناعي متقدم متخصص في البرمجة والعلوم**
@@ -90,8 +90,8 @@
 git clone https://github.com/youssef-official/edrak.git
 cd edrak
 
-# Create virtual environment
-python -m venv venv
+# Create virtual environment (Python 3.10 recommended)
+python3.10 -m venv venv
 
 # Activate virtual environment
 # On Windows:
@@ -127,12 +127,13 @@ To avoid image size limits, we deploy directly using Python. Railway will automa
 2.  **Configure Environment Variables**:
     - Add `PORT` variable (set it to `8000` or leave it, Railway provides it automatically).
     - Add any other variables from `.env.example`.
-3.  **Set Start Command**:
+3.  **Python Version**: This project requires **Python 3.10**. A `runtime.txt` file is included to specify this for Railway.
+4.  **Set Start Command**:
     In Railway service settings, set the **Start Command** to:
     ```bash
     python main.py
     ```
-4.  **Nixpacks**: Ensure Railway is using **Nixpacks** (default) to build the project. It will detect `requirements.txt` and install all dependencies.
+5.  **Nixpacks**: Ensure Railway is using **Nixpacks** (default) to build the project. It will detect `requirements.txt` and install all dependencies.
 
 ---
 
@@ -194,8 +195,8 @@ To avoid image size limits, we deploy directly using Python. Railway will automa
 git clone https://github.com/youssef-official/edrak.git
 cd edrak
 
-# إنشاء بيئة افتراضية
-python -m venv venv
+# إنشاء بيئة افتراضية (يفضل Python 3.10)
+python3.10 -m venv venv
 
 # تفعيل البيئة الافتراضية
 # على Windows:
@@ -227,12 +228,13 @@ python main.py
 2.  **تكوين متغيرات البيئة**:
     - أضف متغير `PORT` (اجعله `8000` أو اتركه، Railway يوفره تلقائياً).
     - أضف أي متغيرات أخرى من ملف `.env.example`.
-3.  **إعداد أمر التشغيل (Start Command)**:
+3.  **إصدار Python**: يتطلب هذا المشروع **Python 3.10**. تم تضمين ملف `runtime.txt` لتحديد ذلك لمنصة Railway.
+4.  **إعداد أمر التشغيل (Start Command)**:
     في إعدادات الخدمة في Railway، قم بتعيين **Start Command** إلى:
     ```bash
     python main.py
     ```
-4.  **Nixpacks**: تأكد من أن Railway يستخدم **Nixpacks** (الافتراضي) لبناء المشروع. سيكتشف ملف `requirements.txt` ويقوم بتثبيت كافة المكتبات المطلوبة.
+5.  **Nixpacks**: تأكد من أن Railway يستخدم **Nixpacks** (الافتراضي) لبناء المشروع. سيكتشف ملف `requirements.txt` ويقوم بتثبيت كافة المكتبات المطلوبة.
 
 ---
 
