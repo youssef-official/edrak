@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  edrak-ai:
+    build: .
+    container_name: edrak-ai
+    ports:
+      - "8000:8000"
+    environment:
+      - EDRAK_API_HOST=0.0.0.0
+      - EDRAK_API_PORT=8000
+      - EDRAK_USE_GPU=false
+      - DEBUG=false
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: edrak-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:

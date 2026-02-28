@@ -1,0 +1,155 @@
+# Edrak AI Configuration
+# المخترع: يوسف السيد الغريب (Youssef Elsayed Elghareeb)
+
+edrak_ai:
+  name: "Edrak AI"
+  name_arabic: "إدراك"
+  version: "1.0.0-alpha"
+  codename: "Al-Fateh"
+  
+  creator:
+    name: "Youssef Elsayed Elghareeb"
+    name_arabic: "يوسف السيد الغريب"
+    title: "AI Architect & Creator"
+  
+  # Model Architecture
+  model:
+    architecture: "EdrakTransformer"
+    vocab_size: 100000
+    hidden_size: 4096
+    num_layers: 48
+    num_attention_heads: 64
+    intermediate_size: 16384
+    max_position_embeddings: 32768
+    dropout: 0.1
+    attention_dropout: 0.1
+    activation_function: "swiglu"
+    layer_norm_eps: 1.0e-6
+    use_cache: true
+    tie_word_embeddings: false
+    
+    # Multi-Modal Support
+    vision_encoder: true
+    vision_hidden_size: 1024
+    vision_num_layers: 24
+    
+    # Code-specific
+    code_tokenizer:
+      languages: ["python", "javascript", "typescript", "html", "css", "cpp", "java", "rust", "go", "sql"]
+      max_code_length: 16384
+      
+    # Arabic Support
+    arabic:
+      dialects: ["msa", "egyptian", "gulf", "levantine", "maghrebi"]
+      poetry_support: true
+      grammar_correction: true
+      
+  # Training Configuration
+  training:
+    batch_size: 32
+    gradient_accumulation_steps: 8
+    learning_rate: 1.0e-4
+    weight_decay: 0.1
+    warmup_steps: 2000
+    max_grad_norm: 1.0
+    num_epochs: 10
+    fp16: true
+    dataloader_num_workers: 8
+    
+    # Learning from Humans
+    rlhf:
+      enabled: true
+      reward_model: "EdrakRewardModel"
+      ppo_epochs: 4
+      ppo_clip: 0.2
+      kl_coef: 0.1
+      
+    # Self-Correction
+    self_correction:
+      enabled: true
+      correction_threshold: 0.7
+      feedback_loop: true
+      
+  # API Configuration
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 4
+    max_requests_per_minute: 1000
+    
+    endpoints:
+      chat: "/v1/chat/completions"
+      completions: "/v1/completions"
+      embeddings: "/v1/embeddings"
+      code: "/v1/code/generate"
+      code_review: "/v1/code/review"
+      math: "/v1/math/solve"
+      arabic: "/v1/arabic/process"
+      learn: "/v1/learn/feedback"
+      
+  # Capabilities
+  capabilities:
+    code_generation:
+      - "web_development"
+      - "mobile_apps"
+      - "desktop_apps"
+      - "system_programming"
+      - "data_science"
+      - "machine_learning"
+      
+    design:
+      - "ui_ux"
+      - "responsive_design"
+      - "animation"
+      - "3d_graphics"
+      - "typography"
+      
+    arabic_language:
+      - "understanding_dialects"
+      - "poetry_generation"
+      - "grammar_correction"
+      - "translation"
+      - "sentiment_analysis"
+      
+    mathematics:
+      - "algebra"
+      - "calculus"
+      - "geometry"
+      - "statistics"
+      - "linear_algebra"
+      - "differential_equations"
+      
+    physics:
+      - "mechanics"
+      - "electromagnetism"
+      - "thermodynamics"
+      - "quantum_mechanics"
+      - "relativity"
+      
+    graphics_3d:
+      - "modeling"
+      - "rendering"
+      - "animation"
+      - "shaders"
+      
+  # Personality
+  personality:
+    tone: "professional_calm"
+    empathy_level: 0.9
+    creativity: 0.85
+    precision: 0.95
+    arabic_proverbs: true
+    
+  # Memory & Learning
+  memory:
+    short_term_size: 10000
+    long_term_enabled: true
+    user_preference_learning: true
+    context_awareness: true
+    
+  # Safety
+  safety:
+    content_filter: true
+    code_security_scan: true
+    bias_detection: true
+    arabic_content_moderation: true

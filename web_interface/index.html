@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edrak AI - إدراك | الذكاء الاصطناعي المتقدم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --bg-dark: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --bg-input: #252542;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border: #2e2e4a;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-2: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(120deg); }
+            66% { transform: translate(-2%, 1%) rotate(240deg); }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-input);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            max-width: 1800px;
+            margin: 0 auto;
+            height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .mode-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mode-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-align: right;
+        }
+
+        .mode-btn:hover {
+            background: var(--bg-input);
+            color: var(--text-primary);
+        }
+
+        .mode-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
+
+        .mode-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Chat Area */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(37, 37, 66, 0.5);
+        }
+
+        .chat-mode {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .chat-mode-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 85%;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: var(--gradient-2);
+        }
+
+        .message.assistant .message-avatar {
+            background: var(--gradient-1);
+        }
+
+        .message-content {
+            background: var(--bg-input);
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            line-height: 1.8;
+        }
+
+        .message.user .message-content {
+            background: var(--gradient-1);
+            border-color: transparent;
+        }
+
+        .message-content pre {
+            background: #1e1e2e;
+            padding: 1rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        .message-content code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+
+        .message-content p {
+            margin: 0.5rem 0;
+        }
+
+        .message-content p:first-child {
+            margin-top: 0;
+        }
+
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Input Area */
+        .chat-input-container {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            background: rgba(37, 37, 66, 0.5);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            min-height: 56px;
+            max-height: 200px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .send-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Options Panel */
+        .options-panel {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            overflow-y: auto;
+        }
+
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .option-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .option-select:focus {
+            border-color: var(--primary);
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--bg-input);
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+
+        .slider-value {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+        }
+
+        .toggle-label {
+            font-size: 0.875rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: var(--bg-input);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            right: 26px;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-input);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-input);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            align-self: flex-start;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 240px 1fr 280px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+            }
+            
+            .sidebar, .options-panel {
+                display: none;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-1);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .loading-text {
+            margin-top: 2rem;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--bg-input);
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 2px;
+            animation: loadingProgress 2s ease-in-out infinite;
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; transform: translateX(-100%); }
+            50% { width: 100%; transform: translateX(0); }
+            100% { width: 100%; transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingScreen">
+        <div class="loading-logo">إ</div>
+        <div class="loading-text">جاري تحميل إدراك...</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">إ</div>
+            <div class="logo-text">
+                <span class="logo-title">إدراك</span>
+                <span class="logo-subtitle">Edrak AI - Advanced Intelligence</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="clearChat()">
+                <span>🗑️</span>
+                <span>مسح المحادثة</span>
+            </button>
+            <button class="btn btn-primary" onclick="showAbout()">
+                <span>ℹ️</span>
+                <span>عن إدراك</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-title">وضع التشغيل</div>
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="general" onclick="setMode('general')">
+                    <span class="mode-icon">🧠</span>
+                    <span>عام</span>
+                </button>
+                <button class="mode-btn" data-mode="code" onclick="setMode('code')">
+                    <span class="mode-icon">💻</span>
+                    <span>برمجة</span>
+                </button>
+                <button class="mode-btn" data-mode="arabic" onclick="setMode('arabic')">
+                    <span class="mode-icon">📝</span>
+                    <span>العربية</span>
+                </button>
+                <button class="mode-btn" data-mode="math" onclick="setMode('math')">
+                    <span class="mode-icon">📐</span>
+                    <span>رياضيات</span>
+                </button>
+                <button class="mode-btn" data-mode="physics" onclick="setMode('physics')">
+                    <span class="mode-icon">⚛️</span>
+                    <span>فيزياء</span>
+                </button>
+                <button class="mode-btn" data-mode="3d" onclick="setMode('3d')">
+                    <span class="mode-icon">🎨</span>
+                    <span>رسومات 3D</span>
+                </button>
+            </div>
+
+            <div class="sidebar-title" style="margin-top: 2rem;">الإحصائيات</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalMessages">0</div>
+                    <div class="stat-label">الرسائل</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="tokensUsed">0</div>
+                    <div class="stat-label">التوكنات</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat Area -->
+        <main class="chat-container">
+            <div class="chat-header">
+                <div class="chat-mode">
+                    <span class="chat-mode-indicator"></span>
+                    <span id="currentMode">الوضع العام</span>
+                </div>
+                <div id="modelInfo">Edrak-1.0</div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Welcome Message -->
+                <div class="message assistant">
+                    <div class="message-avatar">إ</div>
+                    <div class="message-content">
+                        <p>أهلاً بيك في <strong>إدراك</strong>! 👋</p>
+                        <p>أنا نموذج ذكاء اصطناعي متقدم متخصص في:</p>
+                        <ul style="margin: 0.5rem 1rem;">
+                            <li>البرمجة وتطوير الويب</li>
+                            <li>اللغة العربية بجميع لهجاتها</li>
+                            <li>الرياضيات والفيزياء</li>
+                            <li>الرسومات ثلاثية الأبعاد</li>
+                        </ul>
+                        <p>إزاي أقدر أساعدك النهاردة؟</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="message-avatar">إ</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea 
+                        class="chat-input" 
+                        id="chatInput" 
+                        placeholder="اكتب رسالتك هنا..."
+                        rows="1"
+                        onkeydown="handleKeyDown(event)"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Options Panel -->
+        <aside class="options-panel">
+            <div class="option-group">
+                <label class="option-label">اللغة / اللهجة</label>
+                <select class="option-select" id="languageSelect">
+                    <option value="msa">الفصحى</option>
+                    <option value="egyptian" selected>اللهجة المصرية</option>
+                    <option value="gulf">اللهجة الخليجية</option>
+                    <option value="levantine">اللهجة الشامية</option>
+                    <option value="maghrebi">اللهجة المغربية</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label class="option-label">درجة الإبداع (Temperature)</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="temperatureSlider" min="0" max="2" step="0.1" value="0.7" oninput="updateSliderValue(this, 'tempValue')">
+                    <span class="slider-value" id="tempValue">0.7</span>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <label class="option-label">الحد الأقصى للطول</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="maxTokensSlider" min="256" max="8192" step="256" value="4096" oninput="updateSliderValue(this, 'tokensValue')">
+                    <span class="slider-value" id="tokensValue">4096</span>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <label class="option-label">الإعدادات</label>
+                
+                <div class="toggle">
+                    <span class="toggle-label">تدفق الرد (Streaming)</span>
+                    <div class="toggle-switch active" id="streamingToggle" onclick="toggleSwitch(this)"></div>
+                </div>
+                
+                <div class="toggle">
+                    <span class="toggle-label">إظهار خطوات الحل</span>
+                    <div class="toggle-switch active" id="stepsToggle" onclick="toggleSwitch(this)"></div>
+                </div>
+                
+                <div class="toggle">
+                    <span class="toggle-label">التحقق من الأمان</span>
+                    <div class="toggle-switch active" id="safetyToggle" onclick="toggleSwitch(this)"></div>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <label class="option-label">نبذة</label>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.8;">
+                    تم تطوير <strong>إدراك</strong> بواسطة 
+                    <span style="color: var(--primary);">يوسف السيد الغريب</span>
+                    ليكون مساعداً ذكياً متخصصاً في البرمجة والعلوم.
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // State
+        let currentMode = 'general';
+        let messages = [];
+        let isTyping = false;
+        const API_BASE_URL = 'http://localhost:8000';
+
+        // Mode names
+        const modeNames = {
+            general: 'الوضع العام',
+            code: 'وضع البرمجة',
+            arabic: 'وضع العربية',
+            math: 'وضع الرياضيات',
+            physics: 'وضع الفيزياء',
+            '3d': 'وضع الرسومات 3D'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Set Mode
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+            document.getElementById('currentMode').textContent = modeNames[mode];
+        }
+
+        // Send Message
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message || isTyping) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            input.style.height = 'auto';
+            
+            // Show typing indicator
+            showTyping(true);
+            isTyping = true;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/v1/chat/completions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'edrak-1.0',
+                        messages: [
+                            { role: 'system', content: `You are Edrak AI, a helpful assistant. Current mode: ${currentMode}` },
+                            { role: 'user', content: message }
+                        ],
+                        temperature: parseFloat(document.getElementById('temperatureSlider').value),
+                        max_tokens: parseInt(document.getElementById('maxTokensSlider').value),
+                        stream: document.getElementById('streamingToggle').classList.contains('active'),
+                        code_mode: currentMode === 'code',
+                        math_mode: currentMode === 'math',
+                        physics_mode: currentMode === 'physics',
+                        graphics_3d: currentMode === '3d',
+                        arabic_dialect: document.getElementById('languageSelect').value
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.choices && data.choices[0]) {
+                    const content = data.choices[0].message.content;
+                    addMessage(content, 'assistant');
+                    
+                    // Update stats
+                    if (data.usage) {
+                        updateStats(data.usage.total_tokens);
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('عذراً، حدث خطأ في الاتصال. يرجى التأكد من تشغيل الخادم.', 'assistant');
+            } finally {
+                showTyping(false);
+                isTyping = false;
+            }
+        }
+
+        // Add Message to Chat
+        function addMessage(content, role) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            // Parse markdown and code
+            let formattedContent = content;
+            
+            // Highlight code blocks
+            formattedContent = formattedContent.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+                return `<pre><code class="language-${lang || 'plaintext'}">${escapeHtml(code)}</code></pre>`;
+            });
+            
+            // Inline code
+            formattedContent = formattedContent.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Bold and italic
+            formattedContent = formattedContent.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            formattedContent = formattedContent.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            
+            // Line breaks
+            formattedContent = formattedContent.replace(/\n/g, '<br>');
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${role === 'assistant' ? 'إ' : 'أ'}</div>
+                <div class="message-content">${formattedContent}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Highlight code
+            messageDiv.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+            
+            // Update message count
+            messages.push({ role, content });
+            document.getElementById('totalMessages').textContent = messages.length;
+        }
+
+        // Show/Hide Typing Indicator
+        function showTyping(show) {
+            const indicator = document.getElementById('typingIndicator');
+            if (show) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        }
+
+        // Handle Key Down
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Auto Resize Textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
+        }
+
+        // Update Slider Value
+        function updateSliderValue(slider, valueId) {
+            document.getElementById(valueId).textContent = slider.value;
+        }
+
+        // Toggle Switch
+        function toggleSwitch(toggle) {
+            toggle.classList.toggle('active');
+        }
+
+        // Update Stats
+        function updateStats(tokens) {
+            const currentTokens = parseInt(document.getElementById('tokensUsed').textContent);
+            document.getElementById('tokensUsed').textContent = currentTokens + tokens;
+        }
+
+        // Clear Chat
+        function clearChat() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = `
+                <div class="message assistant">
+                    <div class="message-avatar">إ</div>
+                    <div class="message-content">
+                        <p>تم مسح المحادثة. كيف يمكنني مساعدتك؟</p>
+                    </div>
+                </div>
+            `;
+            messages = [];
+            document.getElementById('totalMessages').textContent = '0';
+            document.getElementById('tokensUsed').textContent = '0';
+        }
+
+        // Show About
+        function showAbout() {
+            alert(`Edrak AI - إدراك
+
+الإصدار: 1.0.0-alpha
+المطور: يوسف السيد الغريب (Youssef Elsayed Elghareeb)
+
+نموذج ذكاء اصطناعي متقدم متخصص في:
+- البرمجة وتطوير الويب
+- اللغة العربية بجميع لهجاتها
+- الرياضيات والفيزياء
+- الرسومات ثلاثية الأبعاد`);
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

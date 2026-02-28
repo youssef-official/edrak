@@ -1,0 +1,71 @@
+# Edrak AI - Requirements
+# Created by: Youssef Elsayed Elghareeb (يوسف السيد الغريب)
+
+# Core ML/DL
+torch>=2.1.0
+torchvision>=0.16.0
+torchaudio>=2.1.0
+transformers>=4.35.0
+datasets>=2.14.0
+accelerate>=0.24.0
+peft>=0.6.0
+bitsandbytes>=0.41.0
+
+# API & Web
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+websockets>=12.0
+
+# Arabic NLP
+pyarabic>=0.6.15
+camel-tools>=1.5.0
+arabic-reshaper>=3.0.0
+python-bidi>=0.4.2
+
+# Code Processing
+tree-sitter>=0.20.4
+tree-sitter-python>=0.20.4
+tree-sitter-javascript>=0.20.4
+tree-sitter-typescript>=0.20.4
+tree-sitter-html>=0.20.4
+tree-sitter-css>=0.20.4
+black>=23.11.0
+autopep8>=2.0.4
+pylint>=3.0.3
+
+# Math & Physics
+sympy>=1.12
+numpy>=1.26.0
+scipy>=1.11.0
+matplotlib>=3.8.0
+plotly>=5.18.0
+
+# 3D & Graphics
+pillow>=10.1.0
+opencv-python>=4.8.0
+trimesh>=4.0.0
+pygltflib>=1.16.0
+
+# Database & Storage
+sqlalchemy>=2.0.0
+alembic>=1.12.0
+redis>=5.0.0
+chromadb>=0.4.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0.1
+tqdm>=4.66.0
+rich>=13.7.0
+loguru>=0.7.0
+httpx>=0.25.0
+aiofiles>=23.2.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Monitoring
+prometheus-client>=0.19.0
