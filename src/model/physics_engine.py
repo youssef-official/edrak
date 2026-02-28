@@ -262,7 +262,7 @@ class PhysicsEngine:
             result = self._solve_mechanics(problem, analysis, show_derivation)
         elif topic == "electromagnetism":
             result = self._solve_electromagnetism(problem, analysis, show_derivation)
-        elif topic == "thermodynamics"::
+        elif topic == "thermodynamics":
             result = self._solve_thermodynamics(problem, analysis, show_derivation)
         elif topic == "quantum_mechanics":
             result = self._solve_quantum(problem, analysis, show_derivation)
