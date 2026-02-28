@@ -22,15 +22,13 @@
   - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [API Reference](#api-reference)
-  - [Deployment on Railway](#deployment-on-railway)
+  - [Deployment on Railway (No Docker)](#deployment-on-railway-no-docker)
 - [العربية](#العربية)
   - [نظرة عامة](#نظرة-عامة)
   - [المميزات](#المميزات)
   - [التثبيت](#التثبيت)
   - [الاستخدام](#الاستخدام)
-  - [مرجع API](#مرجع-api)
-  - [النشر على Railway](#النشر-على-railway)
+  - [النشر على Railway (بدون Docker)](#النشر-على-railway-بدون-docker)
 
 ---
 
@@ -103,9 +101,6 @@ source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Download pre-trained model (optional)
-# Place model files in the models/ directory
 ```
 
 ### Usage
@@ -122,86 +117,22 @@ The API server will start at `http://localhost:8000`
 
 Open `web_interface/index.html` in your browser to access the interactive web interface.
 
-#### API Example
-
-```python
-import requests
-
-# Chat completion
-response = requests.post("http://localhost:8000/v1/chat/completions", json={
-    "model": "edrak-1.0",
-    "messages": [
-        {"role": "user", "content": "اكتب دالة بلغة Python لحساب factorial"}
-    ],
-    "temperature": 0.7,
-    "code_mode": True
-})
-
-print(response.json())
-```
-
-### API Reference
-
-#### Chat Completions
-```http
-POST /v1/chat/completions
-```
-
-Request body:
-```json
-{
-  "model": "edrak-1.0",
-  "messages": [
-    {"role": "user", "content": "Your message here"}
-  ],
-  "temperature": 0.7,
-  "max_tokens": 4096,
-  "code_mode": false,
-  "arabic_dialect": "egyptian",
-  "math_mode": false,
-  "physics_mode": false,
-  "graphics_3d": false
-}
-```
-
-#### Code Generation
-```http
-POST /v1/code/generate
-```
-
-Request body:
-```json
-{
-  "prompt": "Create a React button component",
-  "language": "javascript",
-  "framework": "react",
-  "include_tests": true
-}
-```
-
-#### Math Solver
-```http
-POST /v1/math/solve
-```
-
-Request body:
-```json
-{
-  "problem": "Solve x^2 + 5x + 6 = 0",
-  "show_steps": true
-}
-```
-
 ---
 
-### Deployment on Railway
+### Deployment on Railway (No Docker)
 
-Railway is a modern infrastructure platform that allows you to deploy your applications quickly and easily. Follow these steps to deploy Edrak AI on Railway:
+To avoid image size limits, we deploy directly using Python. Railway will automatically detect the Python environment.
 
-1.  **Create a new project on Railway**: Go to [Railway.app](https://railway.app/) and create a new project. You can connect your GitHub account and select the `youssef-official/edrak` repository.
-2.  **Configure Environment Variables**: Edrak AI might require environment variables for configuration. Check the `.env.example` file in the project root for a list of necessary variables. You will need to add these variables to your Railway project settings under the "Variables" tab. For example, if `API_KEY` is listed in `.env.example`, you would add `API_KEY` and its corresponding value in Railway.
-3.  **Build and Deploy**: Railway will automatically detect the `Dockerfile` in the project root and use it to build and deploy your application. Ensure your `Dockerfile` is correctly configured to run `main.py`.
-4.  **Access your application**: Once deployed, Railway will provide a public URL for your application. You can access the API and web interface through this URL.
+1.  **Create a new project on Railway**: Connect your GitHub and select `youssef-official/edrak`.
+2.  **Configure Environment Variables**:
+    - Add `PORT` variable (set it to `8000` or leave it, Railway provides it automatically).
+    - Add any other variables from `.env.example`.
+3.  **Set Start Command**:
+    In Railway service settings, set the **Start Command** to:
+    ```bash
+    python main.py
+    ```
+4.  **Nixpacks**: Ensure Railway is using **Nixpacks** (default) to build the project. It will detect `requirements.txt` and install all dependencies.
 
 ---
 
@@ -274,9 +205,6 @@ source venv/bin/activate
 
 # تثبيت المتطلبات
 pip install -r requirements.txt
-
-# تحميل النموذج المدرب مسبقاً (اختياري)
-# ضع ملفات النموذج في مجلد models/
 ```
 
 ### الاستخدام
@@ -289,90 +217,22 @@ python main.py
 
 سيبدأ خادم API على العنوان `http://localhost:8000`
 
-#### الواجهة الويبية
-
-افتح `web_interface/index.html` في متصفحك للوصول إلى الواجهة التفاعلية.
-
-#### مثال API
-
-```python
-import requests
-
-# إكمال الدردشة
-response = requests.post("http://localhost:8000/v1/chat/completions", json={
-    "model": "edrak-1.0",
-    "messages": [
-        {"role": "user", "content": "اكتب دالة بلغة Python لحساب factorial"}
-    ],
-    "temperature": 0.7,
-    "code_mode": True
-})
-
-print(response.json())
-```
-
-### مرجع API
-
-#### إكمال الدردشة
-```http
-POST /v1/chat/completions
-```
-
-هيئة الطلب:
-```json
-{
-  "model": "edrak-1.0",
-  "messages": [
-    {"role": "user", "content": "رسالتك هنا"}
-  ],
-  "temperature": 0.7,
-  "max_tokens": 4096,
-  "code_mode": false,
-  "arabic_dialect": "egyptian",
-  "math_mode": false,
-  "physics_mode": false,
-  "graphics_3d": false
-}
-```
-
-#### توليد الكود
-```http
-POST /v1/code/generate
-```
-
-هيئة الطلب:
-```json
-{
-  "prompt": "إنشاء مكون زر في React",
-  "language": "javascript",
-  "framework": "react",
-  "include_tests": true
-}
-```
-
-#### حل الرياضيات
-```http
-POST /v1/math/solve
-```
-
-هيئة الطلب:
-```json
-{
-  "problem": "حل x^2 + 5x + 6 = 0",
-  "show_steps": true
-}
-```
-
 ---
 
-### النشر على Railway
+### النشر على Railway (بدون Docker)
 
-Railway هي منصة بنية تحتية حديثة تتيح لك نشر تطبيقاتك بسرعة وسهولة. اتبع هذه الخطوات لنشر Edrak AI على Railway:
+لتجنب مشكلة حجم الصورة الكبيرة، سنقوم بالنشر مباشرة باستخدام Python. سيقوم Railway باكتشاف بيئة Python تلقائياً.
 
-1.  **إنشاء مشروع جديد على Railway**: انتقل إلى [Railway.app](https://railway.app/) وقم بإنشاء مشروع جديد. يمكنك ربط حساب GitHub الخاص بك واختيار مستودع `youssef-official/edrak`.
-2.  **تكوين متغيرات البيئة**: قد يتطلب Edrak AI متغيرات بيئة للتكوين. تحقق من ملف `.env.example` في جذر المشروع للحصول على قائمة بالمتغيرات الضرورية. ستحتاج إلى إضافة هذه المتغيرات إلى إعدادات مشروعك في Railway ضمن علامة التبويب "Variables". على سبيل المثال، إذا كان `API_KEY` مدرجًا في `.env.example`، فستضيف `API_KEY` وقيمته المقابلة في Railway.
-3.  **البناء والنشر**: سيكتشف Railway تلقائيًا ملف `Dockerfile` في جذر المشروع ويستخدمه لبناء ونشر تطبيقك. تأكد من تكوين `Dockerfile` بشكل صحيح لتشغيل `main.py`.
-4.  **الوصول إلى تطبيقك**: بمجرد النشر، ستوفر Railway عنوان URL عامًا لتطبيقك. يمكنك الوصول إلى واجهة برمجة التطبيقات والواجهة الويبية من خلال عنوان URL هذا.
+1.  **إنشاء مشروع جديد على Railway**: اربط حساب GitHub الخاص بك واختر مستودع `youssef-official/edrak`.
+2.  **تكوين متغيرات البيئة**:
+    - أضف متغير `PORT` (اجعله `8000` أو اتركه، Railway يوفره تلقائياً).
+    - أضف أي متغيرات أخرى من ملف `.env.example`.
+3.  **إعداد أمر التشغيل (Start Command)**:
+    في إعدادات الخدمة في Railway، قم بتعيين **Start Command** إلى:
+    ```bash
+    python main.py
+    ```
+4.  **Nixpacks**: تأكد من أن Railway يستخدم **Nixpacks** (الافتراضي) لبناء المشروع. سيكتشف ملف `requirements.txt` ويقوم بتثبيت كافة المكتبات المطلوبة.
 
 ---
 
@@ -406,51 +266,6 @@ edrak-ai/
 ├── data/                      # Training data
 └── logs/                      # Log files
 ```
-
----
-
-## 📊 Model Specifications
-
-| Parameter | Value |
-|-----------|-------|
-| Architecture | Transformer with RoPE |
-| Hidden Size | 4,096 |
-| Layers | 48 |
-| Attention Heads | 64 |
-| Vocabulary Size | 100,000 |
-| Max Context Length | 32,768 |
-| Parameters | ~8B |
-
----
-
-## 🎯 Performance Benchmarks
-
-| Task | Accuracy |
-|------|----------|
-| Code Generation | 92% |
-| Arabic Understanding | 95% |
-| Math Problem Solving | 88% |
-| Physics Problem Solving | 85% |
-| 3D Scene Generation | 90% |
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **Creator**: Youssef Elsayed Elghareeb (يوسف السيد الغريب)
-- **Inspired by**: The rich Arabic scientific heritage and modern AI research
 
 ---
 
