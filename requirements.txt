@@ -1,15 +1,17 @@
-# Edrak AI - Requirements
+# Edrak AI - Requirements (Optimized for Railway CPU Deployment)
 # Created by: Youssef Elsayed Elghareeb (يوسف السيد الغريب)
 
-# Core ML/DL
-torch>=2.1.0
-torchvision>=0.16.0
-torchaudio>=2.1.0
+# Core ML/DL (Using CPU-only versions for faster build and Railway compatibility)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.1.0+cpu
+torchvision>=0.16.0+cpu
+torchaudio>=2.1.0+cpu
 transformers>=4.35.0
 datasets>=2.14.0
 accelerate>=0.24.0
 peft>=0.6.0
-bitsandbytes>=0.41.0
+# Removed bitsandbytes as it requires CUDA (GPU), not needed for CPU-only deployment
+# bitsandbytes>=0.41.0
 
 # API & Web
 fastapi>=0.104.0
@@ -20,7 +22,6 @@ websockets>=12.0
 
 # Arabic NLP
 pyarabic>=0.6.15
-# Updated camel-tools version to ensure compatibility with Python 3.10+
 camel-tools>=1.4.1
 arabic-reshaper>=3.0.0
 python-bidi>=0.4.2
@@ -45,7 +46,7 @@ plotly>=5.18.0
 
 # 3D & Graphics
 pillow>=10.1.0
-opencv-python>=4.8.0
+opencv-python-headless>=4.8.0
 trimesh>=4.0.0
 pygltflib>=1.16.0
 
